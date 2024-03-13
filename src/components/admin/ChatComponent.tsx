@@ -38,32 +38,31 @@ const ChatComponent = () => {
         </PopoverTrigger>
         <PopoverContent
           align="start"
-          className=" bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500 to-blue-600 w-80 h-80 relative flex   items-center justify-center overflow-y-auto "
+          className=" bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500 to-blue-600 w-[400px] h-96 relative flex  p-0  items-center justify-center"
         >
-          {messagesArray.length === 0 ? (
-            <div className="flex flex-col items-center   w-full">
-              <MessagesSquare />
-              Chat with video
-            </div>
-          ) : null}
-          {messagesArray.length > 0 ? (
-            <div className="flex flex-col gap-y-4 w-full text-center my-16">
-              {messagesArray.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`p-2 rounded-xl ${
-                    msg.isUser
-                      ? 'bg-black text-white'
-                      : 'bg-gray-300 text-black'
-                  }`}
-                >
-                  {msg.message}
-                </div>
-              ))}
-            </div>
-          ) : (
-            ''
-          )}
+          <div className="w-full h-full relative overflow-y-auto p-3">
+            {messagesArray.length === 0 ? (
+              <div className="flex flex-col items-center absolute top-40 right-1   w-full">
+                <MessagesSquare />
+                Chat with video
+              </div>
+            ) : (
+              <div className="flex flex-col gap-y-4 w-full text-center mb-16">
+                {messagesArray.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={`p-2  ${
+                      msg.isUser
+                        ? 'bg-black text-white ml-10 rounded-xl rounded-br-none'
+                        : 'bg-gray-300 text-black mr-10 rounded-xl rounded-bl-none'
+                    }`}
+                  >
+                    {msg.message} {index}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           <Input
             className="fixed w-full left-0 bottom-0 pr-10 outline-none"
