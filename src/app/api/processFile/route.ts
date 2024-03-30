@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
 
   try {
     const { url } = await req.json();
-    //parse the blob file and get the textual data
     const extractedText = await parseVtt(url);
 
     // store it to vector DB - Qdrant DB

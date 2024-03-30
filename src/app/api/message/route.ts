@@ -11,16 +11,23 @@ export async function POST(req: NextRequest) {
 
   try {
     const { question, collectionName, history } = await req.json();
-    const recentMessages = JSON.parse(history).slice(0, -1).slice(0, 12);
-    console.log(recentMessages, question);
+    //get the course ID here and then fetch from DB the collection name
+    const recentMessages = JSON.parse(history);
+    let slicedRecentMessages;
+    if (recentMessages.length > 6) {
+      slicedRecentMessages = recentMessages.slice(recentMessages.length - 6);
+    } else {
+      slicedRecentMessages = recentMessages;
+    }
     const answer = await answerRetrieval(
       question,
       collectionName,
-      recentMessages,
+      slicedRecentMessages,
     );
 
     return NextResponse.json({ answer });
   } catch (e: any) {
+    console.log(e);
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }

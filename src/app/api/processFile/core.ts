@@ -33,6 +33,7 @@ export const storeToDB = async (text: string): Promise<QdrantVectorStore> => {
     url: process.env.QDRANT_URL,
     collectionName: collection,
   });
+  // you need to save this collection name in courses section
   console.log(collection);
   return index;
 };

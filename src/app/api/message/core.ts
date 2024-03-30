@@ -17,7 +17,7 @@ export const answerRetrieval = async (
   recentMessages: recentMessagesOutput[],
 ): Promise<string> => {
   const model = new ChatOpenAI({
-    modelName: 'gpt-3.5-turbo-0125',
+    modelName: process.env.OPENAI_MODEL_NAME,
     temperature: 0.5,
   });
 
@@ -75,7 +75,6 @@ export const answerRetrieval = async (
     combineDocsChain: chain,
     retriever: retrieverChain,
   });
-  // check for question each time
 
   const response = await conversationChain.invoke({
     chat_history: chatHistory,
