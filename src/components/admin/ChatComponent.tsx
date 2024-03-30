@@ -81,8 +81,11 @@ const ChatComponent = () => {
         </PopoverTrigger>
         <PopoverContent
           align="start"
-          className="bg-[#F4F5F6] w-[400px] h-96 relative flex p-0 items-center justify-center"
+          className="bg-[#F4F5F6] w-[400px] h-[400px] relative flex flex-col p-0 items-center justify-center"
         >
+          <div className="bg-[#1584FF] w-full p-[10px] text-sm rounded-sm rounded-b-none">
+            Chat with video
+          </div>
           <div
             className="w-full h-full relative overflow-y-auto p-3"
             ref={chatContainerRef}
@@ -109,7 +112,9 @@ const ChatComponent = () => {
                   ),
                 )}
                 {isLoading && (
-                  <ClipLoader color="blue" loading={isLoading} size={30} />
+                  <div className="chat-bubble bg-[#BDBDBD] text-black w-full ml-10 rounded-br-none ">
+                    <ClipLoader color="blue" loading={isLoading} size={30} />
+                  </div>
                 )}
               </div>
             )}
@@ -117,7 +122,7 @@ const ChatComponent = () => {
           <form onSubmit={handleSendMessage}>
             <Input
               required
-              className="fixed w-full left-0 bottom-0 pr-10 outline-none"
+              className="fixed left-0 bottom-0 pr-10 outline-none rounded-t-none text-black  focus:outline-none focus:ring  w-full focus-visible:ring-0 focus-visible: bg-slate-100"
               value={message}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setMessage(e.target.value);
@@ -126,7 +131,7 @@ const ChatComponent = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className="fixed bottom-0 right-0 p-2"
+              className="fixed bottom-0 right-0 p-2 text-black  rounded-sm"
             >
               Ask
             </button>
