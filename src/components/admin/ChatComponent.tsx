@@ -114,8 +114,13 @@ const ChatComponent = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className=" text-justify items-end flex flex-col">
-                      <div className="p-1">
+                    <div className=" text-left flex flex-col ">
+                      <MarkdownRenderer
+                        key={index}
+                        content={msg.text}
+                        id={index.toString()}
+                      />
+                      <div className="p-1 w-full flex justify-end items-end">
                         <Image
                           src="/harkirat.png"
                           alt=""
@@ -123,17 +128,12 @@ const ChatComponent = () => {
                           width={30}
                         />
                       </div>
-                      <MarkdownRenderer
-                        key={index}
-                        content={msg.text}
-                        id={index.toString()}
-                      />
                     </div>
                   ),
                 )}
                 {isLoading && (
-                  <div className="chat-bubble bg-[#BDBDBD] text-black w-full ml-7 rounded-br-none ">
-                    <ClipLoader color="blue" loading={isLoading} size={30} />
+                  <div className="chat-bubble bg-slate-900 text-black w-full ml-7 rounded-br-none ">
+                    <ClipLoader color="white" loading={isLoading} size={30} />
                   </div>
                 )}
               </div>
