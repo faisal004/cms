@@ -15,6 +15,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { X } from 'lucide-react';
 import MarkdownRenderer from './MarkdownRenderer';
+import Image from 'next/image';
 
 interface PreviousMessage {
   text: string;
@@ -113,7 +114,15 @@ const ChatComponent = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-[#1584FF] text-justify">
+                    <div className=" text-justify items-end flex flex-col">
+                      <div className="p-1">
+                        <Image
+                          src="/harkirat.png"
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
+                      </div>
                       <MarkdownRenderer
                         key={index}
                         content={msg.text}

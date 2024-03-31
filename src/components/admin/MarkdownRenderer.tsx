@@ -27,6 +27,11 @@ function MarkdownRenderer({ content, id }: { content: string; id: string }) {
       });
   }, [content]);
 
-  return <div id={id} />;
+  return (
+    <div
+      id={id}
+      className="bg-slate-900 text-white py-4 px-4 rounded-2xl rounded-tr-none overflow-auto"
+    />
+  );
 }
 export default MarkdownRenderer;
