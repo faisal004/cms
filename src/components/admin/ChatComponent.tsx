@@ -13,6 +13,8 @@ import {
 import { Input } from '../ui/input';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { X } from 'lucide-react';
+import Image from 'next/image';
 
 interface PreviousMessage {
   text: string;
@@ -24,7 +26,7 @@ const ChatComponent = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [messageList, setMessageList] = useLocalStorage('messageList', []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [popoverOpen, setPopoverOpen] = useState(false);
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -75,16 +77,23 @@ const ChatComponent = () => {
 
   return (
     <div>
-      <Popover>
+      <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
         <PopoverTrigger className="ml-10 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 my-4">
           Chat with video
         </PopoverTrigger>
         <PopoverContent
+          onInteractOutside={(e) => e.preventDefault()}
           align="start"
-          className="bg-[#F4F5F6] w-[400px] h-[400px] relative flex flex-col p-0 items-center justify-center"
+          className="bg-[#F4F5F6] w-[300px] h-[400px] relative flex flex-col p-0 items-center justify-center scroll"
         >
-          <div className="bg-[#1584FF] w-full p-[10px] text-sm rounded-sm rounded-b-none">
-            Chat with video
+          <div className="bg-[#1584FF] w-full p-[10px] flex justify-between text-sm rounded-sm rounded-b-none">
+            <div>Chat with video</div>
+            <div
+              className="cursor-pointer"
+              onClick={() => setPopoverOpen(false)}
+            >
+              <X className="h-5 w-5" />
+            </div>
           </div>
           <div
             className="w-full h-full relative overflow-y-auto p-3"
@@ -104,7 +113,16 @@ const ChatComponent = () => {
                       </div>
                     </div>
                   ) : (
-                    <div key={index} className="chat chat-end ">
+                    <div
+                      key={index}
+                      className="chat chat-end flex flex-row-reverse "
+                    >
+                      <Image
+                        src="/harkirat.png"
+                        alt="HS"
+                        height={20}
+                        width={20}
+                      />
                       <div className="chat-bubble bg-[#BDBDBD] text-black ">
                         {msg.text}
                       </div>
@@ -112,7 +130,7 @@ const ChatComponent = () => {
                   ),
                 )}
                 {isLoading && (
-                  <div className="chat-bubble bg-[#BDBDBD] text-black w-full ml-10 rounded-br-none ">
+                  <div className="chat-bubble bg-[#BDBDBD] text-black w-full ml-7 rounded-br-none ">
                     <ClipLoader color="blue" loading={isLoading} size={30} />
                   </div>
                 )}
