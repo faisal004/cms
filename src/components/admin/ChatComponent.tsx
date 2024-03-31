@@ -14,7 +14,7 @@ import { Input } from '../ui/input';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { X } from 'lucide-react';
-import Image from 'next/image';
+import MarkdownRenderer from './MarkdownRenderer';
 
 interface PreviousMessage {
   text: string;
@@ -84,10 +84,10 @@ const ChatComponent = () => {
         <PopoverContent
           onInteractOutside={(e) => e.preventDefault()}
           align="start"
-          className="bg-[#F4F5F6] w-[300px] h-[400px] relative flex flex-col p-0 items-center justify-center scroll"
+          className="bg-[#F4F5F6] w-[600px] h-[600px] relative flex flex-col p-0 items-center justify-center scroll"
         >
           <div className="bg-[#1584FF] w-full p-[10px] flex justify-between text-sm rounded-sm rounded-b-none">
-            <div>Chat with video</div>
+            <div>Clarify Doubts</div>
             <div
               className="cursor-pointer"
               onClick={() => setPopoverOpen(false)}
@@ -113,20 +113,7 @@ const ChatComponent = () => {
                       </div>
                     </div>
                   ) : (
-                    <div
-                      key={index}
-                      className="chat chat-end flex flex-row-reverse "
-                    >
-                      <Image
-                        src="/harkirat.png"
-                        alt="HS"
-                        height={20}
-                        width={20}
-                      />
-                      <div className="chat-bubble bg-[#BDBDBD] text-black ">
-                        {msg.text}
-                      </div>
-                    </div>
+                    <MarkdownRenderer key={index} content={msg.text} />
                   ),
                 )}
                 {isLoading && (

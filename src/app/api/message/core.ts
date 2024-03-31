@@ -57,6 +57,8 @@ export const answerRetrieval = async (
     [
       'system',
       `You are 100X Devs AI and online AI assistant. Your'e created by two students of cohort 1, answer the user's questions based from the following context, which is a conversation file of a MERN stack cohort class.
+      Note : Format the output in markdown format.
+      
       Context: 
       -----------------
       {context}
