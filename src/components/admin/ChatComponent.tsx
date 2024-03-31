@@ -113,7 +113,13 @@ const ChatComponent = () => {
                       </div>
                     </div>
                   ) : (
-                    <MarkdownRenderer key={index} content={msg.text} />
+                    <div className="text-[#1584FF] text-justify">
+                      <MarkdownRenderer
+                        key={index}
+                        content={msg.text}
+                        id={index.toString()}
+                      />
+                    </div>
                   ),
                 )}
                 {isLoading && (

@@ -4,9 +4,8 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
-import Image from 'next/image';
 
-function MarkdownRenderer({ content }: { content: string }) {
+function MarkdownRenderer({ content, id }: { content: string; id: string }) {
   React.useEffect(() => {
     unified()
       .use(remarkParse)
@@ -17,7 +16,7 @@ function MarkdownRenderer({ content }: { content: string }) {
         if (err) {
           console.error('Error processing content:', err);
         } else {
-          const element = document.getElementById('content');
+          const element = document.getElementById(id);
 
           if (element) {
             element.innerHTML = file?.value as string;
@@ -28,12 +27,6 @@ function MarkdownRenderer({ content }: { content: string }) {
       });
   }, [content]);
 
-  return (
-    <div className="chat chat-end flex flex-row-reverse ">
-      <Image src="/harkirat.png" alt="HS" height={20} width={20} />
-
-      <div className="chat-bubble bg-[#BDBDBD] text-black" id="content"></div>
-    </div>
-  );
+  return <div id={id} />;
 }
 export default MarkdownRenderer;
